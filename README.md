@@ -25,8 +25,8 @@ The Payment Application is designed to manage and process payments efficiently. 
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/mrsamirr/payment-application.git
-    cd payment-application
+    git clone https://github.com/swarajbharadwaj/PaySphere-Your-Digital-Vault.git
+    cd PaySphere-Your-Digital-Vault
     ```
 
 2. **Install dependencies**:
