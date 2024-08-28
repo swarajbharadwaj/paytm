@@ -10,7 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.6.7",
+    "axios": "1.6.7",
+    "frontend": "file:",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.0"
@@ -27,6 +28,6 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "vite": "^5.0.8"
+    "vite": "^5.4.2"
   }
 }

@@ -1,16 +1,41 @@
 const mongoose = require('mongoose');
-const { number } = require('zod');
 require('dotenv').config();
 
-mongoose.connect(process.env.MONGO_URI);
-
-const userSchema = new mongoose.Schema({
-    username: String,
-    firstName: String,
-    lastName: String,
-    password: String,
+// Connect to MongoDB with error handling
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
 
+// Define User schema
+const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+    },
+    firstName: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    lastName: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+}, {
+    timestamps: true
+});
+
+// Define Account schema
 const accountsSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -20,13 +45,17 @@ const accountsSchema = new mongoose.Schema({
     balance: {
         type: Number,
         required: true,
+        min: 0,  // Ensure balance is non-negative
     },
-})
+}, {
+    timestamps: true
+});
 
+// Create models
 const User = mongoose.model('User', userSchema);
-const Account = mongoose.model('Account', accountsSchema)
+const Account = mongoose.model('Account', accountsSchema);
 
 module.exports = {
     User,
     Account
-}
+};
