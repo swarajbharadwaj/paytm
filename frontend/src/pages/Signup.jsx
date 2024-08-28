@@ -6,7 +6,7 @@ import {BottomWarning} from "../components/BottomWarning";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Signup() {
     const [firstName, setFirstName] = useState("");
@@ -21,25 +21,29 @@ function Signup() {
         setter(value);
     }
 
+
+
     async function handleRegister(e) {
         e.preventDefault();
-            const response = await axios.post("https://pay-sphere-your-digital-vault-81im.vercel.app/api/v1/user/signup", {
+        try {
+            const response = await axios.post(`${API_URL}/user/signup`, {
                 username: username,
                 firstName: firstName,
                 lastName: lastName,
                 password: password,
-            },
-            {
+            }, {
                 headers: {
                     "Content-Type": "application/json",
                 },
-            }).then((res) => {
-                localStorage.setItem('token', res.data.token);
-                console.log(res.data)
-                navigate('/dashboard')
-            })
+            });
+            localStorage.setItem('token', response.data.token);
+            console.log(response.data);
+            navigate('/dashboard');
+        } catch (error) {
+            console.error("Error during registration:", error);
+        }
     }
-
+    
     return (
         <div className="bg-slate-300 h-screen flex justify-center">
             <div className="flex flex-col justify-center">
