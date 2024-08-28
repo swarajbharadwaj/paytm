@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {AppbarHomepage} from "../components/AppbarHomepage";
 import axios from "axios";
+
 const API_URL = import.meta.env.VITE_API_URL;
 function Signin(){
     const [username, setUsername] = useState("");
@@ -22,7 +23,7 @@ function Signin(){
     async function handlelogin (e) {
         e.prevent.default();
         console.log(username, password)
-            const response = await axios.post(`${API_URL}/api/v1/signin`, {
+            const response = await axios.post(`${API_URL}/api/v1/user/signin`, {
                 username: username,
                 password: password,
             },
