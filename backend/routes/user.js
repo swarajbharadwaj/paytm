@@ -41,17 +41,18 @@ router.post('/signup', async (req, res) => {
             balance: 1 + Math.random() * 10000
         });
 
-        const token = jwt.sign({ userId }, process.env.JWT_SECRET);
+        const token = jwt.sign({ userId }, process.env.JWT_SECRET);  // Synchronous, no await needed
 
         res.json({
             message: "User created successfully",
             token: token
         });
     } catch (error) {
-        console.error('Error during signup:', error);
+        console.error('Error during signup:', error);  // Check what the error is here
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 
 const signinBody = zod.object({
     username: zod.string().email(),
@@ -71,7 +72,7 @@ router.post('/signin', async (req, res) => {
         });
 
         if (user) {
-            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+            const token = await jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
             return res.json({ token: token });
         }
         return res.status(411).json({ message: "Invalid username or password" });
