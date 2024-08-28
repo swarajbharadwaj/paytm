@@ -22,7 +22,7 @@ function Signin(){
     async function handlelogin (e) {
         e.prevent.default();
         console.log(username, password)
-            const response = await axios.post(`${API_URL}/api/v1/user/signin`, {
+            const response = await axios.post(`${API_URL}/api/v1/signin`, {
                 username: username,
                 password: password,
             },
