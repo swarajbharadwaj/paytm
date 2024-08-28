@@ -26,7 +26,7 @@ function Signup() {
     async function handleRegister(e) {
         e.preventDefault();
         try {
-            const response = await axios.post(`${API_URL}/user/signup`, {
+            const response = await axios.post("https://pay-sphere-your-digital-vault-81im.vercel.app/api/v1/user/signup", {
                 username: username,
                 firstName: firstName,
                 lastName: lastName,
