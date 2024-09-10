@@ -41,7 +41,7 @@ router.post('/signup', async (req, res) => {
             balance: 1 + Math.random() * 10000
         });
 
-        const token = jwt.sign({ userId }, 1234567);  // Synchronous, no await needed
+        const token = jwt.sign({ userId }, "1234567");  // Synchronous, no await needed
 
         res.json({
             message: "User created successfully",
@@ -72,7 +72,7 @@ router.post('/signin', async (req, res) => {
         });
 
         if (user) {
-            const token = await jwt.sign({ userId: user._id }, 1234567);
+            const token = await jwt.sign({ userId: user._id }, "1234567");
             return res.json({ token: token });
         }
         return res.status(411).json({ message: "Invalid username or password" });
