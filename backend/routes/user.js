@@ -72,7 +72,7 @@ router.post('/signin', async (req, res) => {
         });
 
         if (user) {
-            const token = await jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+            const token = await jwt.sign({ userId: user._id }, 1234567);
             return res.json({ token: token });
         }
         return res.status(411).json({ message: "Invalid username or password" });
